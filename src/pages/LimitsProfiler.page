@@ -1,0 +1,65 @@
+<apex:page controller="LimitsProfilerController" sidebar="false" docType="html-5.0"
+           title="Profiling - {!profilerType}">
+    
+    <apex:pageMessage severity="FATAL" rendered="{!NOT(isTypeDefined)}"
+                      summary="Type not defined or does not extend LimitsProfiler - {!profilerType}" />
+    
+    <apex:pageBlock >
+        <apex:pageBlockButtons >
+            <apex:form >
+                <apex:commandButton value="Measure" action="{!measure}" rendered="{!isTypeDefined}" />
+                <apex:commandButton value="Configure" action="{!configure}" />
+            </apex:form>
+        </apex:pageBlockButtons>
+    	<apex:pageBlockTable value="{!diffs}" var="snapshot" rendered="{!isTypeDefined}">
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayAggregateQueries__c}"
+                         headerValue="Aggregate Queries"
+                         value="{!snapshot.aggregateQueries}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayAsyncCalls__c}"
+                         headerValue="Async Calls"
+                         value="{!snapshot.asyncCalls}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayCallouts__c}"
+                         headerValue="Callouts"
+                         value="{!snapshot.callouts}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayCpuTime__c}"
+                         headerValue="CPU Time"
+                         value="{!snapshot.cpuTime}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayDmlRows__c}"
+                         headerValue="DML Rows"
+                         value="{!snapshot.dmlRows}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayDmlStatements__c}"
+                         headerValue="DML Statements"
+                         value="{!snapshot.dmlStatements}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayEmailInvocations__c}"
+                         headerValue="Email Invocations"
+                         value="{!snapshot.emailInvocations}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayFutureCalls__c}"
+                         headerValue="Future Calls"
+                         value="{!snapshot.futureCalls}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayHeapSize__c}"
+                         headerValue="Heap Size"
+                         value="{!snapshot.heapSize}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayMobilePushApexCalls__c}"
+                         headerValue="Mobile Push Apex Calls"
+                         value="{!snapshot.mobilePushApexCalls}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayQueries__c}"
+                         headerValue="Queries"
+                         value="{!snapshot.queries}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayQueryLocatorRows__c}"
+                         headerValue="Query Locator Rows"
+                         value="{!snapshot.queryLocatorRows}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayQueryRows__c}"
+                         headerValue="Query Rows"
+                         value="{!snapshot.queryRows}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayQueueableJobs__c}"
+                         headerValue="Queueable Jobs"
+                         value="{!snapshot.queueableJobs}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplaySOSLQueries__c}"
+                         headerValue="SOSL Queries"
+                         value="{!snapshot.soslQueries}" />
+            <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayRawTime__c}"
+                         headerValue="Raw Time"
+                         value="{!snapshot.rawTime}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

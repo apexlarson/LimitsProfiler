@@ -1,0 +1,33 @@
+<apex:page controller="LimitsProfilerConfigController" sidebar="false" docType="html-5.0"
+           title="Configure Limits Profiler">
+    <apex:form id="options">
+        <apex:pageBlock >
+            <div style="width:100%;text-align:center">
+                <apex:commandButton value="Save" action="{!save}" />
+                <apex:commandButton value="Cancel" action="{!cancel}" immediate="true" />
+            </div>
+            <apex:pageBlockSection title="Profiler">
+                <apex:inputField value="{!config.ProfilerType__c}" />
+                <apex:inputField value="{!config.Iterations__c}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Display Options">
+                <apex:inputField value="{!config.DisplayAggregateQueries__c}" />
+                <apex:inputField value="{!config.DisplayAsyncCalls__c}" />
+                <apex:inputField value="{!config.DisplayCallouts__c}" />
+                <apex:inputField value="{!config.DisplayCpuTime__c}" />
+                <apex:inputField value="{!config.DisplayDmlRows__c}" />
+                <apex:inputField value="{!config.DisplayDmlStatements__c}" />
+                <apex:inputField value="{!config.DisplayEmailInvocations__c}" />
+                <apex:inputField value="{!config.DisplayFutureCalls__c}" />
+                <apex:inputField value="{!config.DisplayHeapSize__c}" />
+                <apex:inputField value="{!config.DisplayMobilePushApexCalls__c}" />
+                <apex:inputField value="{!config.DisplayQueries__c}" />
+                <apex:inputField value="{!config.DisplayQueryLocatorRows__c}" />
+                <apex:inputField value="{!config.DisplayQueryRows__c}" />
+                <apex:inputField value="{!config.DisplayQueueableJobs__c}" />
+                <apex:inputField value="{!config.DisplayRawTime__c}" />
+                <apex:inputField value="{!config.DisplaySOSLQueries__c}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
