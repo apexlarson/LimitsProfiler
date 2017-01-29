@@ -69,6 +69,8 @@ public with sharing class Profilers
 
 Try running this profiler with various logging levels and you will see just how much performance can vary based on your settings. Even with the conservative example above there can be a difference of over 3x from the lowest to the highest logging level.
 
+More significant than logging levels, however, is that each run constitutes a separate transaction. This has important implications, such as allowing you to run trials which in aggregate consume more than 10s CPU Time. It also means that when you profile triggers which access lazy loaded data (for example), the code will re-initialize each time. To be able to provide a consistent measurement without context switching was not possible using `Execute Anonymous` alone.
+
 ## Install Links
 
 - **[Version 1.1](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t410000022Gc1)** - Configurable Visualforce UI makes profiling possible with logging turned off.	
