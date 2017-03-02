@@ -71,5 +71,12 @@ Try running this profiler with various logging levels and you will see just how 
 
 ## Install Links
 
+**Production**
+
 - **[Version 1.1](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t410000022Gc1)** - Configurable Visualforce UI makes profiling possible with logging turned off.	
 - **[Version 1.0](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t410000022FLP)** - LimitsSnapshot and LimitsProfiler classes enable basic profiling via anonymous scripts
+
+**Sandbox**
+
+- **[Version 1.1](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t410000022Gc1)** - Configurable Visualforce UI makes profiling possible with logging turned off.	
+- **[Version 1.0](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t410000022FLP)** - LimitsSnapshot and LimitsProfiler classes enable basic profiling via anonymous scripts
