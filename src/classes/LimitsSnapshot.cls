@@ -1,4 +1,4 @@
-global class LimitsSnapshot
+global with sharing class LimitsSnapshot
 {
     global static LimitsSnapshot getInstance()
     {
@@ -23,6 +23,12 @@ global class LimitsSnapshot
             b.queueableJobs - a.queueableJobs, b.soslQueries - a.soslQueries,
             b.heapSize - a.heapSize, b.cpuTime - a.cpuTime, b.rawTime - a.rawTime
         );
+    }
+    global static List<Limits_Snapshot__c> getRecords(List<LimitsSnapshot> snapshots)
+    {
+        List<Limits_Snapshot__c> records = new List<Limits_Snapshot__c>();
+        for (LimitsSnapshot snapshot : snapshots) records.add(snapshot.newSObject());
+        return records;
     }
     
     global Integer aggregateQueries { get; private set; }
@@ -63,5 +69,17 @@ global class LimitsSnapshot
         this.heapSize = heapSize;
         this.cpuTime = cpuTime;
         this.rawTime = rawTime;
+    }
+    global Limits_Snapshot__c newSObject()
+    {
+        return new Limits_Snapshot__c(
+            Aggregate_Queries__c = aggregateQueries, Async_Calls__c = asyncCalls,
+            Callouts__c = callouts, CPU_Time__c = cpuTime, DML_Rows__c = dmlRows,
+            DML_Statements__c = dmlStatements, Email_Invocations__c = emailInvocations,
+            Future_Calls__c = futureCalls, Heap_Size__c = heapSize, Elapsed_ms__c = rawTime,
+            Mobile_Push_Apex_Calls__c = mobilePushApexCalls, Queries__c = queries,
+            Query_Locator_Rows__c = queryLocatorRows, Query_Rows__c = queryRows,
+            Queueable_Jobs__c = queueableJobs, SOSL_Queries__c = soslQueries
+        );
     }
 }
