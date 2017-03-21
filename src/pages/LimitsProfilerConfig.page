@@ -30,4 +30,8 @@
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
+    
+    <style>
+        .pbSubheader.brandTertiaryBgr.tertiaryPalette { background-color: #1797c0; }
+    </style>
 </apex:page>

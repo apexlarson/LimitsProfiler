@@ -69,14 +69,30 @@ public with sharing class Profilers
 
 Try running this profiler with various logging levels and you will see just how much performance can vary based on your settings. Even with the conservative example above there can be a difference of over 3x from the lowest to the highest logging level.
 
+More significant than logging levels, however, is that each run constitutes a separate transaction. This benefit has important implications, such as allowing you to run trials which in aggregate consume more than 10s CPU Time. It also means that when you profile triggers which access lazy loaded data (for example), the code will re-initialize each time. To be able to provide a consistent measurement without context switching was not possible using `Execute Anonymous` alone.
+
+### Version 1.2
+
+This version introduces a `Limits_Snapshot__c` object which allows you to persist data from profiling runs. It tracks all limits usage and can be generated directly from a `LimitsSnapshot` instance in `Apex` using the `newSObject()` method:
+
+```apex
+Limits_Snaphsot__c record = LimitsSnapshot.getInstance().newSObject();
+```
+
+The Visualforce UI also now includes a `Save` button, which saves the diffs already measured.
+
+This version also introduces the `LimitsProfilerConfig__c` hierarchy setting to the repository so it can be pulled directly into an org without requiring any package installation.
+
 ## Install Links
 
 **Production**
 
+- **[Version 1.2](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t41000002RXGo)** - Persistent objects make it possible to store and track performance.
 - **[Version 1.1](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t410000022Gc1)** - Configurable Visualforce UI makes profiling possible with logging turned off.	
 - **[Version 1.0](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t410000022FLP)** - LimitsSnapshot and LimitsProfiler classes enable basic profiling via anonymous scripts
 
 **Sandbox**
 
+- **[Version 1.2](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t41000002RXGo)** - Persistent objects make it possible to store and track performance.
 - **[Version 1.1](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t410000022Gc1)** - Configurable Visualforce UI makes profiling possible with logging turned off.	
 - **[Version 1.0](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t410000022FLP)** - LimitsSnapshot and LimitsProfiler classes enable basic profiling via anonymous scripts

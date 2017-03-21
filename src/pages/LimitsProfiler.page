@@ -1,17 +1,31 @@
 <apex:page controller="LimitsProfilerController" sidebar="false" docType="html-5.0"
            title="Profiling - {!profilerType}">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Configuration">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Profiler Type" />
+                    <apex:outputText value="{!profilerType}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Iterations" />
+                    <apex:outputText value="{!iterations}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save ({!diffs.size})" action="{!save}" disabled="{!diffs.empty}" />
+                <apex:commandButton value="Measure" action="{!measure}" rendered="{!isTypeDefined}" />
+                <apex:commandButton value="Configure" action="{!configure}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
     
+    <apex:pageMessages />
     <apex:pageMessage severity="FATAL" rendered="{!NOT(isTypeDefined)}"
                       summary="Type not defined or does not extend LimitsProfiler - {!profilerType}" />
     
     <apex:pageBlock >
-        <apex:pageBlockButtons >
-            <apex:form >
-                <apex:commandButton value="Measure" action="{!measure}" rendered="{!isTypeDefined}" />
-                <apex:commandButton value="Configure" action="{!configure}" />
-            </apex:form>
-        </apex:pageBlockButtons>
-    	<apex:pageBlockTable value="{!diffs}" var="snapshot" rendered="{!isTypeDefined}">
+        <apex:pageBlockTable value="{!diffs}" var="snapshot" rendered="{!isTypeDefined}">
             <apex:column rendered="{!$Setup.LimitsProfilerConfig__c.DisplayAggregateQueries__c}"
                          headerValue="Aggregate Queries"
                          value="{!snapshot.aggregateQueries}" />
@@ -62,4 +76,7 @@
                          value="{!snapshot.rawTime}" />
         </apex:pageBlockTable>
     </apex:pageBlock>
+    <style>
+        .pbSubheader.brandTertiaryBgr.tertiaryPalette { background-color: #1797c0; }
+    </style>
 </apex:page>
